@@ -1,0 +1,39 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/tomcatist/springcloud-config.git
+          # 搜索目录
+          search-paths:
+            - springcloud-config
+          username: tomcatist
+          password: 18232336174...
+      # 读取分支
+      label: master
+  # Rabbitmq 相关配置
+  rabbitmq:
+    host: 172.16.211.2
+    port: 15672
+    username: guest
+    password: guest
+
+# 服务注册到Eureka地址
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+
+# Rabbitmq 相关配置，暴露bus刷新配置的端点
+management:
+  endpoints:  # 暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: "bus-refresh"

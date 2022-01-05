@@ -1,0 +1,24 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-feign-order
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+
+ribbon:
+  #OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
+  ReadTimeout: 5000   #负载均衡超时时间，默认值5000
+  ConnectTimeout: 5000 #ribbon请求连接的超时时间，默认值2000
+  #MaxAutoRetries: 0     #对当前实例的重试次数，默认0
+  #MaxAutoRetriesNextServer: 0 #对切换实例的重试次数，默认1
+logging:
+  level:
+    # feign日志以什么级别监听哪个接口
+    com.yuan.springcloud.service.PaymentFeignService: debug
